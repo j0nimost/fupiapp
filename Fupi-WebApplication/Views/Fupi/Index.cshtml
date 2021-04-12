@@ -1,0 +1,52 @@
+﻿@model Fupi_WebApplication.DTOs.FupiRequestDto
+
+@*@{
+    ViewData["Title"] = "Index";
+}*@
+
+
+<div class="row">
+    
+    <div class="col-md-3">
+        <h4>Get Fupi-ed!</h4>
+        <hr />
+        <div>
+            Hey there, welcome to <b>Fupi-ed!</b> a new way to shorten a normal url.
+            To try out our tool paste a valid url in the text area and click the button.
+            Copy the Url and share it.
+        </div>
+    </div>
+    
+    <div class="col-md-5">
+        <br />
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Url" class="control-label">Enter Url</label>
+                <input asp-for="Url" class="form-control" />
+                <br />
+                <span class="text-info">
+                    <span id="url">@ViewBag.FupiUrl</span>&#8287;
+                    @if (@ViewBag.FupiUrl != null)
+                    {
+                        <btn type="button" class="btn btn-light" onclick="CopyToClipboard()">
+                            <span class="tooltiptext" id="myTooltip">Copy</span>
+                        </btn>
+                    }
+
+                </span>
+                <span class="text-danger">@ViewBag.Error</span>
+                <span asp-validation-for="Url" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Fupi-ed!" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  fupi-webapplication:
+    image: ${DOCKER_REGISTRY-}fupiwebapplication
+    ports:
+      - "8000:80"
+      - "8001:443"
+    build:
+      context: .
+      dockerfile: Fupi-WebApplication/Dockerfile
+
+  fupi-keygenservice:
+    image: ${DOCKER_REGISTRY-}fupikeygenservice
+    build:
+      context: .
+      dockerfile: Fupi-KeyGenService/Dockerfile
+
